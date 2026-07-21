@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class="container">
+    <div class="jumbrotan">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>{{ user.username }}</h1>
+                <h6>{{ user.email }}</h6>
+                <h6>{{ user.userdetails.phone }}</h6>
+                <h6>{{ user.userdetails.house_no }}</h6>
+                <h6>{{ user.userdetails.address }}</h6>
+                <h6>{{ user.userdetails.city }}</h6>
+                <h6>{{ user.userdetails.state }}</h6>
+                <h6>{{ user.userdetails.zipcode }}</h6>
+                <a class="btn btn-info" href="{% url 'update' %}">Update</a>
+       
+
+            </div>     
+            <div class="col-md-6">
+                {% if user.userdetails.userpic %}
+                    <img src="{{ user.userdetails.userpic.url }}"
+                    height="300px" width="300px" alt="" style="border-radius: 50%;">
+                         <!-- width="200"
+                         height="200"
+                         style="border-radius:50%;> -->
+                {% else %}
+                    <p>No Profile Picture</p>
+                {% endif %}
+
+            </div>
+
+        </div>
+        
+        
+    </div>
+    
+</div>
+
+{% endblock %}

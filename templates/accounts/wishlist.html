@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">My Wishlist ❤️</h2>
+
+    {% if wishlist_items %}
+
+    <div class="row">
+
+        {% for item in wishlist_items %}
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card h-100 shadow">
+
+                <img src="{{ item.food.foodimg.url }}"
+                     class="card-img-top"
+                     style="height:320px; object-fit:contain;">
+
+                <div class="card-body">
+
+                    <h4>{{ item.food.foodname }}</h4>
+
+                    <p>
+                        <strong>Restaurant:</strong>
+                        {{ item.food.restaurant.RestaurentName }}
+                    </p>
+
+                    <h5 class="text-primary">
+                        ₹{{ item.food.price }}
+                    </h5>
+
+                    <p>
+                        <strong>Available:</strong>
+                        {{ item.food.Qty }}
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-white">
+
+                    <a href="{% url 'add_to_cart' item.food.id %}"
+                       class="btn btn-success">
+
+                        Add to Cart
+
+                    </a>
+
+                    <a href="{% url 'remove_wishlist' item.id %}"
+                       class="btn btn-danger">
+
+                        Remove
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="alert alert-info text-center">
+
+        <h4>Your Wishlist is Empty ❤️</h4>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

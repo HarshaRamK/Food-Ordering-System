@@ -1,0 +1,143 @@
+{% extends 'vendor_base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h3 class="text-center mb-0">
+                        Update Restaurant Profile
+                    </h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form method="POST" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Restaurant Name
+                            </label>
+                            {{ form.RestaurentName }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                License Number
+                            </label>
+                            {{ form.LICNo }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                GST Number
+                            </label>
+                            {{ form.GSTNo }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Restaurant Email
+                            </label>
+                            {{ form.Restaurent_email }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Restaurant Phone
+                            </label>
+                            {{ form.Restaurent_phone }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Restaurant Address
+                            </label>
+                            {{ form.Restaurent_address }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Landmark
+                            </label>
+                            {{ form.landmark }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Zipcode
+                            </label>
+                            {{ form.zipcode }}
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Current Restaurant Image
+                            </label><br>
+
+                            {% if form.instance.Restaurent_img %}
+                                <img src="{{ form.instance.Restaurent_img.url }}"
+                                     width="250"
+                                     class="img-thumbnail mb-2">
+                            {% endif %}
+
+                            {{ form.Restaurent_img }}
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Current License Certificate
+                            </label><br>
+
+                            {% if form.instance.LIC_Certificate %}
+                                <img src="{{ form.instance.LIC_Certificate.url }}"
+                                     width="250"
+                                     class="img-thumbnail mb-2">
+                            {% endif %}
+
+                            {{ form.LIC_Certificate }}
+
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+
+                            <a href="{% url 'vendor_profile' %}"
+                               class="btn btn-secondary">
+                                Cancel
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-success">
+
+                                Save Changes
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

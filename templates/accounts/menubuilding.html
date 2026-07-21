@@ -1,0 +1,35 @@
+{% extends 'vendor_base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card card-body">
+
+        <h1 class="text-center">
+            Build Food Menu
+        </h1>
+
+        <form method="POST"
+              enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            {{ form|crispy }}
+
+            <button type="submit"
+                    class="btn btn-success">
+
+                Add Food
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'vendor_base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h1 class="text-center mb-4">
+        Vendor Profile
+    </h1>
+
+    <div class="card shadow">
+
+        <!-- Restaurant Image -->
+        {% if user.vendordetails.Restaurent_img %}
+        <img src="{{ user.vendordetails.Restaurent_img.url }}"
+             class="card-img-top"
+             style="height:400px; object-fit:cover;">
+        {% endif %}
+
+        <div class="card-body">
+
+            <h2 class="card-title text-center">
+                {{ user.vendordetails.RestaurentName }}
+            </h2>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <p>
+                        <strong>Restaurant Email:</strong><br>
+                        {{ user.vendordetails.Restaurent_email }}
+                    </p>
+
+                    <p>
+                        <strong>Restaurant Phone:</strong><br>
+                        {{ user.vendordetails.Restaurent_phone }}
+                    </p>
+
+                    <p>
+                        <strong>Restaurant Address:</strong><br>
+                        {{ user.vendordetails.Restaurent_address }}
+                    </p>
+
+                    <p>
+                        <strong>Landmark:</strong><br>
+                        {{ user.vendordetails.landmark }}
+                    </p>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <p>
+                        <strong>Zipcode:</strong><br>
+                        {{ user.vendordetails.zipcode }}
+                    </p>
+
+                    <p>
+                        <strong>License Number:</strong><br>
+                        {{ user.vendordetails.LICNo }}
+                    </p>
+
+                    <p>
+                        <strong>GST Number:</strong><br>
+                        {{ user.vendordetails.GSTNo }}
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong><br>
+
+                        {% if user.vendordetails.is_approved %}
+
+                            <span class="badge bg-success">
+                                Approved
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-warning text-dark">
+                                Pending Approval
+                            </span>
+
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="d-flex justify-content-center gap-3">
+
+                <a href="{% url 'vendor_dashboard' %}"
+                   class="btn btn-secondary">
+                    ⬅ Back
+                </a>
+
+                <a href="{% url 'vendor_update' %}"
+                   class="btn btn-primary">
+                    ✏ Update Profile
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

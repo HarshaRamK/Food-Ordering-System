@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">My Orders</h2>
+
+    {% if orders %}
+
+    <table class="table table-bordered table-hover">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>Food</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Payment Method</th>
+                <th>Payment Status</th>
+                <th>Order Date</th>
+                <th>Action</th>
+                <th>Review</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for order in orders %}
+
+            <tr>
+
+                <td>{{ order.food.foodname }}</td>
+
+                <td>{{ order.quantity }}</td>
+
+                <td>₹{{ order.total_price }}</td>
+
+                <td>
+
+                    {% if order.status == "Pending" %}
+
+                        <span class="badge bg-warning text-dark">
+                            Pending
+                        </span>
+
+                    {% elif order.status == "Accepted" %}
+
+                        <span class="badge bg-primary">
+                            Accepted
+                        </span>
+
+                    {% elif order.status == "Preparing" %}
+
+                        <span class="badge bg-info">
+                            Preparing
+                        </span>
+
+                    {% elif order.status == "Out for Delivery" %}
+
+                        <span class="badge bg-secondary">
+                            Out for Delivery
+                        </span>
+
+                    {% elif order.status == "Delivered" %}
+
+                        <span class="badge bg-success">
+                            Delivered
+                        </span>
+
+                    {% elif order.status == "Cancelled" %}
+
+                        <span class="badge bg-danger">
+                            Cancelled
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>{{ order.payment_method }}</td>
+
+                <td>
+
+                    {% if order.payment_status == "Paid" %}
+
+                        <span class="badge bg-success">
+                            Paid
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge bg-warning text-dark">
+                            Pending
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>{{ order.order_date }}</td>
+
+                <td>
+
+                    {% if order.status == "Pending" %}
+
+                        <a href="{% url 'cancel_order' order.id %}"
+                           class="btn btn-danger btn-sm">
+                            Cancel
+                        </a>
+
+                    {% elif order.status == "Cancelled" %}
+
+                        <span class="text-danger fw-bold">
+                            Cancelled
+                        </span>
+
+                    {% elif order.status == "Delivered" %}
+
+                        <span class="text-success fw-bold">
+                            Completed
+                        </span>
+
+                    {% else %}
+
+                        <span class="text-secondary">
+                            Not Allowed
+                        </span>
+
+                    {% endif %}
+
+                </td>
+                <td>
+
+                    {% if order.status == "Delivered" %}
+
+                    <a href="{% url 'add_review' order.food.id %}"
+                    class="btn btn-primary btn-sm">
+                        Write Review
+                    </a>
+
+                    {% else %}
+
+                    <span class="text-muted">
+                        Available after delivery
+                    </span>
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% else %}
+
+    <div class="alert alert-info text-center">
+
+        <h5>You haven't placed any orders yet.</h5>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

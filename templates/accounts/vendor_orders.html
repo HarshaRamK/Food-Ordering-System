@@ -1,0 +1,151 @@
+{% extends 'vendor_base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">Customer Orders</h2>
+
+    {% if orders %}
+
+    <table class="table table-bordered table-hover">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>Customer</th>
+                <th>Food</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Ordered On</th>
+                <th>Action</th>
+                <th>Payment</th>
+                <th>Payment Status</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for order in orders %}
+
+            <tr>
+
+                <td>{{ order.user.username }}</td>
+
+                <td>{{ order.food.foodname }}</td>
+
+                <td>{{ order.quantity }}</td>
+
+                <td>₹{{ order.total_price }}</td>
+
+                <td>
+
+                    {% if order.status == "Pending" %}
+
+                        <span class="badge bg-warning text-dark">
+                            Pending
+                        </span>
+
+                    {% elif order.status == "Accepted" %}
+
+                        <span class="badge bg-primary">
+                            Accepted
+                        </span>
+
+                    {% elif order.status == "Delivered" %}
+
+                        <span class="badge bg-success">
+                            Delivered
+                        </span>
+
+                    {% elif order.status == "Rejected" %}
+
+                        <span class="badge bg-danger">
+                            Rejected
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>{{ order.order_date }}</td>
+
+                <td>
+
+                    {% if order.status == "Pending" %}
+
+                        <a href="{% url 'update_order_status' order.id 'Accepted' %}"
+                           class="btn btn-success btn-sm">
+                            Accept
+                        </a>
+
+                        <a href="{% url 'update_order_status' order.id 'Rejected' %}"
+                           class="btn btn-danger btn-sm">
+                            Reject
+                        </a>
+
+                    {% elif order.status == "Accepted" %}
+
+                        <a href="{% url 'update_order_status' order.id 'Delivered' %}"
+                           class="btn btn-primary btn-sm">
+                            Deliver
+                        </a>
+
+                    {% elif order.status == "Delivered" %}
+
+                        <span class="text-success fw-bold">
+                            Completed
+                        </span>
+
+                    {% elif order.status == "Rejected" %}
+
+                        <span class="text-danger fw-bold">
+                            Rejected
+                        </span>
+
+                    {% endif %}
+
+                </td>
+                <td>{{ order.payment_method }}</td>
+
+            <td>
+
+                {% if order.payment_status == "Paid" %}
+
+                    <span class="badge bg-success">
+                        Paid
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-warning text-dark">
+                        Pending
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% else %}
+
+    <div class="alert alert-info text-center">
+
+        <h5>No orders received yet.</h5>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

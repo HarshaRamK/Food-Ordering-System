@@ -1,0 +1,57 @@
+{% extends 'vendor_base.html' %}
+
+{% block content %}
+
+<h2>Food Menu</h2>
+<a href="{% url 'menubuilding' %}" class="btn btn-primary">
+    Add Food
+</a>
+<br><br>
+
+<table border="1" cellpadding="10">
+
+<tr>
+    <th>Image</th>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Action</th>
+</tr>
+
+{% for food in foods %}
+
+<tr>
+
+<td>
+
+<img src="{{ food.foodimg.url }}"
+width="80">
+
+</td>
+
+<td>{{ food.foodname }}</td>
+
+<td>{{ food.type }}</td>
+
+<td>{{ food.price }}</td>
+
+<td>{{ food.Qty }}</td>
+
+<td>
+
+<a href="{% url 'updatefood' food.id %}" class="btn btn-secondary">
+Edit
+
+</a>
+
+<a href="{% url 'deletefood' food.id %}" class="btn btn-danger"> 
+Delete
+</a>
+
+</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

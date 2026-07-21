@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2>Checkout</h2>
+
+    <table class="table table-bordered">
+
+        <thead>
+
+            <tr>
+                <th>Food</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Total</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for item in cart_items %}
+
+            <tr>
+
+                <td>{{ item.food.foodname }}</td>
+
+                <td>₹{{ item.food.price }}</td>
+
+                <td>{{ item.quantity }}</td>
+
+                <td>₹{% widthratio item.food.price 1 item.quantity %}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <div class="text-end">
+
+        <h4>Total Amount : ₹{{ total }}</h4>
+
+        <a href="{% url 'place_order' %}"
+           class="btn btn-success">
+            Place Order
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -31,7 +31,7 @@ class VendorProfileForm(forms.ModelForm):
         model = VendorDetails
         fields =['RestaurentName','LICNo','GSTNo','LIC_Certificate',
                   'Restaurent_email','Restaurent_phone','Restaurent_address','landmark',
-                  'zipcode','Restaurent_img','is_approved']
+                  'zipcode','Restaurent_img']
 
 
 

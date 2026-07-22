@@ -366,6 +366,7 @@ def vendorregistration(request):
 
             profile = form2.save(commit=False)
             profile.user = user
+            profile.is_approved = False
             profile.save()
 
             registered = True

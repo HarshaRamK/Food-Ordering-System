@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-_qn&-4*=l^y_m^yc+k-z07_4dk0cse58l+%n3m(pqo3frwd8ne
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -67,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_auto_logout.middleware.auto_logout',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 PASSWORD_HASHERS = [
@@ -145,6 +146,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR,"static")
 ]
@@ -164,7 +166,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 from datetime import timedelta
 
 AUTO_LOGOUT = {
-    'IDLE_TIME': 30,
+    'IDLE_TIME': 70,
     # 'SESSION_TIME': timedelta(minutes=30),
     # 'MESSAGE': 'The session has expired. Please login again to continue.',
     'REDIRECT_TO_LOGIN_IMMEDIATELY': True,

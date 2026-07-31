@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'payment',
     'wishlist',
     'reviews',
+    "cloudinary",
+    "cloudinary_storage",
 ]
 
 CRISPY_TEMPLATE_PACK ='bootstrap5'
@@ -185,3 +187,13 @@ AUTO_LOGOUT = {
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
+
+import cloudinary
+
+cloudinary.config(
+    cloud_name="pbthmmxe",
+    api_key="426711752312998",
+    api_secret="dY4UKhITo6QAum80gBouJ04OXq8"
+)
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"

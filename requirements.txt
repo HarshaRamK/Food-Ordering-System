@@ -7,3 +7,4 @@ django-recaptcha
 whitenoise
 django-environ
 django-auto-logout
+django-cloudinary-storage

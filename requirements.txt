@@ -6,3 +6,4 @@ crispy-bootstrap5
 django-recaptcha
 whitenoise
 django-environ
+django-auto-logout
